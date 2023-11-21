@@ -1,18 +1,26 @@
-package com.example.major_assignment2
+package com.example.major_assignment2.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.major_assignment2.R
+import com.example.major_assignment2.model.Movies
+import com.example.major_assignment2.ui.activity.AddMovieActivity
+import com.example.major_assignment2.ui.activity.EditMovieActivity
+import com.example.major_assignment2.ui.interfaces.MoviesInterface
+import org.w3c.dom.Text
 
 class MoviesAdapter(
     private var context: Context,
-    private var movieModels: ArrayList<MoviesModel>,
+    private var movieModels: ArrayList<Movies>,
     private val recyclerViewInterface: MoviesInterface
 ) : RecyclerView.Adapter<MoviesAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -33,6 +41,11 @@ class MoviesAdapter(
         holder.movieTitle.text = movieModels[position].title
         holder.movieStudio.text = movieModels[position].studio
         holder.movieRating.text = movieModels[position].rating
+
+        holder.updateButton.setOnClickListener {
+            val intent = Intent(context, EditMovieActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -48,12 +61,16 @@ class MoviesAdapter(
         var movieTitle: TextView
         var movieStudio: TextView
         var movieRating: TextView
+        var updateButton: TextView
+        var deleteButton: TextView
 
         init {
             movieImage = itemView.findViewById(R.id.ivMovieImage)
             movieTitle = itemView.findViewById(R.id.tvMovieTitle)
             movieStudio = itemView.findViewById(R.id.tvMovieStudio)
             movieRating = itemView.findViewById(R.id.tvMovieRating)
+            updateButton = itemView.findViewById(R.id.btnUpdate)
+            deleteButton = itemView.findViewById(R.id.btnDelete)
             itemView.setOnClickListener {
                 if (recyclerViewInterface != null) {
                     val position = adapterPosition

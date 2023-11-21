@@ -2,6 +2,7 @@ package com.example.major_assignment2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.major_assignment2.ui.fragment.MoviesFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

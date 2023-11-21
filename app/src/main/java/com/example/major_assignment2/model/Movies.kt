@@ -1,8 +1,6 @@
-package com.example.major_assignment2
+package com.example.major_assignment2.model
 
-import android.media.Rating
-
-class MoviesModel(
+class Movies(
     var id: Int,
     var imageUrl: String,
     var title: String,
