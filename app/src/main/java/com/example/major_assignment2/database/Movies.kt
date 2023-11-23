@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "movies_table")
 data class Movies(
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "id") val id: Int?,
