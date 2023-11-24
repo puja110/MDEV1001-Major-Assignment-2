@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MDEV1001_Major_Assignment2</string>
     <string name="add_new_movie">Add new movie</string>
+    <string name="email">Email</string>
+    <string name="required">Required</string>
+    <string name="password">Password</string>
 </resources>
