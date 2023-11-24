@@ -1,0 +1,213 @@
+[
+    {
+      "id":1,
+      "movieTitle":"Star Wars: Episode V - The Empire Strikes Back",
+      "studio": "Twentieth Century Fox",
+      "thumbnail": "https://m.media-amazon.com/images/I/51Ep5Pt7urL._SY445_SX342_.jpg",
+      "criticsRating": "8.7"
+    },
+    {
+      "id":2,
+      "movieTitle":"The Matrix",
+      "studio": "Warner Bros. Pictures",
+      "thumbnail": "https://hips.hearstapps.com/hmg-prod/images/the-matrix-1574173308.jpg?crop=1.00xw:0.941xh;0,0.0146xh&resize=2048:*",
+      "criticsRating": "8.7"
+    },
+    {
+      "id":3,
+      "movieTitle":"Star Wars: Episode IV - A New Hope",
+      "studio": "Twentieth Century Fox",
+      "thumbnail": "https://m.media-amazon.com/images/I/91H91NbI2xL._AC_SL1500_.jpg",
+      "criticsRating": "8.6"
+    },
+    {
+      "id":4,
+      "movieTitle":"Back to the Future",
+      "studio": "Universal Pictures",
+      "thumbnail": "https://m.media-amazon.com/images/I/81SsiZe8AJL._AC_SL1500_.jpg",
+      "criticsRating": "8.5"
+    },
+    {
+      "id":5,
+      "movieTitle":"Alien",
+      "studio": "Twentieth Century Fox",
+      "thumbnail": "https://mir-s3-cdn-cf.behance.net/project_modules/fs/5118d781052709.5cf39a3b84c1a.jpg",
+      "criticsRating": "8.5"
+    },
+    {
+      "id":6,
+      "movieTitle":"Raiders of th Lost Ark",
+      "studio": "Paramount Pictures",
+      "thumbnail": "https://m.media-amazon.com/images/I/71fRbA8AX4L._AC_SL1000_.jpg",
+      "criticsRating": "8.4"
+    },
+    {
+      "id":7,
+      "movieTitle":"Blade Runner",
+      "studio": "Warner Bros. Pictures",
+      "thumbnail": "https://miro.medium.com/v2/resize:fit:1100/format:webp/1*4KkBJLj0-_nGCblVAzlA2A.jpeg",
+      "criticsRating": "8.1"
+    },
+    {
+      "id":8,
+      "movieTitle":"The Terminator",
+      "studio": "Orion Pictures",
+      "thumbnail": "https://super142.files.wordpress.com/2022/05/the-terminator.jpg",
+      "criticsRating": "8.1"
+    },
+    {
+      "id":9,
+      "movieTitle":"The Princess Bride",
+      "studio": "Twentieth Century Fox",
+      "thumbnail": "https://m.media-amazon.com/images/I/81rwucabmvL._AC_SL1500_.jpg",
+      "criticsRating": "8"
+    },
+    {
+      "id":10,
+      "movieTitle":"Star Trek II: The Wrath of Khan",
+      "studio": "Paramount Pictures",
+      "thumbnail": "https://m.media-amazon.com/images/I/915Vlqh6j0L._SL1500_.jpg",
+      "criticsRating": "7.7"
+    },
+    {
+      "id":11,
+      "movieTitle":"Barbie",
+      "studio": "Warner Bros. Pictures",
+      "thumbnail": "https://cdn.printerval.com/unsafe/960x960/assets.printerval.com/2023/07/03/64a299bf342285.64322632.jpg",
+      "criticsRating": "7.1"
+    },
+    {
+      "id":12,
+      "movieTitle":"Oppenheimer",
+      "studio": "Universal Pictures",
+      "thumbnail": "https://www.movieposters.com/cdn/shop/files/oppenheimer_ver3_480x.progressive.jpg?v=1685026118",
+      "criticsRating": "8.6"
+    },
+    {
+      "id":13,
+      "movieTitle":"Interstellar",
+      "studio": "Paramount Pictures",
+      "thumbnail": "https://i5.walmartimages.com/asr/29f61ed3-feec-450a-8087-540cfb92cd61_1.f3b49a46eb30f978e29ea0f50ea44a69.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+      "criticsRating": "8.7"
+    },
+    {
+      "id":14,
+      "movieTitle":"Forrest Gump",
+      "studio": "Paramount Pictures",
+      "thumbnail": "https://i5.walmartimages.com/asr/73ed4a13-70c8-49ec-9986-6bf8701f78bc_1.ea6cf9d7fb6148788979a7cc55bf9b2b.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+      "criticsRating": "8.8"
+    },
+    {
+      "id":15,
+      "movieTitle":"Inception",
+      "studio": "Warner Bros. Pictures",
+      "thumbnail": "https://m.media-amazon.com/images/I/91SkGApvcPL._AC_SL1500_.jpg",
+      "criticsRating": "8.8"
+    },
+    {
+      "id":16,
+      "movieTitle":"Glass Onion",
+      "studio": "T-Street Productions",
+      "thumbnail": "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/192/2022/10/25111047/gOrfE0tX7aLjRR12vveQvBHHGa.jpg",
+      "criticsRating": "7.1"
+    },
+    {
+      "id":17,
+      "movieTitle":"The Shawshank Redemption",
+      "studio": "Castle Rock Entertainment",
+      "thumbnail": "https://i.ebayimg.com/images/g/XxMAAOSw~zFg4aCs/s-l1600.jpg",
+      "criticsRating": "9.3"
+    },
+    {
+      "id":18,
+      "movieTitle":"The Godfather",
+      "studio": "Paramount Pictures",
+      "thumbnail": "https://m.media-amazon.com/images/I/61MwEEt+NXL._AC_SL1000_.jpg",
+      "criticsRating": "9.2"
+    },
+    {
+      "id":19,
+      "movieTitle":"The Dark Knight",
+      "studio": "Warner Bros. Pictures",
+      "thumbnail": "https://m.media-amazon.com/images/I/81CLFQwU-WL._AC_SL1500_.jpg",
+      "criticsRating": "9"
+    },
+    {
+      "id":20,
+      "movieTitle":"12 Angry Men",
+      "studio": "Orion-Nova Productions",
+      "thumbnail": "https://m.media-amazon.com/images/I/917ckvQ1LbL._AC_SL1500_.jpg",
+      "criticsRating": "9"
+    },
+    {
+      "id":21,
+      "movieTitle":"Schindler's List",
+      "studio": "Universal Pictures",
+      "thumbnail": "https://m.media-amazon.com/images/I/81EDn94zrBL._AC_SL1500_.jpg",
+      "criticsRating": "9"
+    },
+    {
+      "id":22,
+      "movieTitle":"The Lord of the Rings: The Return of the King",
+      "studio": "New Line Cinema",
+      "thumbnail": "https://m.media-amazon.com/images/I/81QaXcOPSPL._AC_SL1500_.jpg",
+      "criticsRating": "9"
+    },
+    {
+      "id":23,
+      "movieTitle":"Pulp Fiction",
+      "studio": "Miramax",
+      "thumbnail": "https://ca.originalfilmart.com/cdn/shop/products/pulp_fiction_1994_original_film_art_2cc3e3fd-c015-4e37-a280-d4a5ab385b0a_5000x.webp?v=1656096517",
+      "criticsRating": "8.9"
+    },
+    {
+      "id":24,
+      "movieTitle":"The Lord of the Rings: The Fellowship of the Ring",
+      "studio": "New Line Cinema",
+      "thumbnail": "https://m.media-amazon.com/images/I/91aQAzdP2NL._AC_SL1500_.jpg",
+      "criticsRating": "8.8"
+    },
+    {
+      "id":25,
+      "movieTitle":"The Good, the Bad and the Ugly",
+      "studio": "Cinecitta studio",
+      "thumbnail": "https://m.media-amazon.com/images/I/81keqIN-tlL._AC_SL1500_.jpg",
+      "criticsRating": "8.8"
+    },
+    {
+      "id":26,
+      "movieTitle":"Fight Club",
+      "studio": "Fox 2000 Pictures Regency",
+      "thumbnail": "https://i.ebayimg.com/images/g/vc4AAOSwzvpa8PPd/s-l1600.jpg",
+      "criticsRating": "8.8"
+    },
+    {
+      "id":27,
+      "movieTitle":"The Lord of the Rings: The Two Towers",
+      "studio": "New Line Cinema",
+      "thumbnail": "https://m.media-amazon.com/images/I/51YQZB5F2ML._AC_.jpg",
+      "criticsRating": "8.8"
+    },
+    {
+      "id":28,
+      "movieTitle":"Goodfellas",
+      "studio": "Warner Bros. Pictures",
+      "thumbnail": "https://m.media-amazon.com/images/I/81uOV6oMYtL._AC_SL1500_.jpg",
+      "criticsRating": "8.7"
+    },
+    {
+      "id":29,
+      "movieTitle":"One Flew Over the Cuckoo's Nest",
+      "studio": "Fantasy Films",
+      "thumbnail": "https://m.media-amazon.com/images/I/81+ksIlIAvL._AC_SL1500_.jpg",
+      "criticsRating": "8.7"
+    },
+    {
+      "id":30,
+      "movieTitle":"Spider-Man: Across the Spider-Verse",
+      "studio": "Marvel Studios",
+      "thumbnail": "https://m.media-amazon.com/images/I/91Z7A1MdT+L._AC_SL1500_.jpg",
+      "criticsRating": "8.7"
+    }
+
+  ]

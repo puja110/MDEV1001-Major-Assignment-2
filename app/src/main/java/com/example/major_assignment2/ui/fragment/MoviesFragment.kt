@@ -2,10 +2,13 @@ package com.example.major_assignment2.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.major_assignment2.R
@@ -18,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MoviesFragment : Fragment(), MoviesInterface {
 
     private var movies = ArrayList<Movies>()
+    private lateinit var moviesViewModel: MoviesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +37,16 @@ class MoviesFragment : Fragment(), MoviesInterface {
             val intent = Intent(context, AddMovieActivity::class.java)
             startActivity(intent)
         }
+
+      /*  moviesViewModel = ViewModelProviders.of(this)[MoviesViewModel::class.java]
+
+        moviesViewModel.getAllMovies().observe(context, Observer {
+            Log.d("Movies observed", "$it")
+            Log.d("Movies observed 222", "")
+
+            //adapter.submitList(it)
+        })*/
+
         return root
     }
 
