@@ -20,7 +20,8 @@ class PrepopulateMoviesCallback(private val context: Context) : RoomDatabase.Cal
         }
     }
 
-    suspend fun prePopulateUsers(context: Context) {
+//    suspend fun prePopulateUsers(context: Context) {
+    fun prePopulateUsers(context: Context) {
         try {
             val userDao = MoviesDatabase.getDatabaseInstance(context).moviesDao()
 

@@ -6,10 +6,16 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.major_assignment2.database.Movies
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MoviesDao {
+
+    @Query("SELECT * FROM movies_table")
+    fun getMoviesData() : Flow<List<Movies>>
+
+    @Query("SELECT * FROM movies_table ORDER BY id DESC")
+    fun getMovies(): Flow<List<Movies>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addMovie(movie: Movies)

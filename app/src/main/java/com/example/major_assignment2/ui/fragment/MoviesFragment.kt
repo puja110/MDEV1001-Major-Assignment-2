@@ -1,27 +1,26 @@
 package com.example.major_assignment2.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.major_assignment2.R
+import com.example.major_assignment2.database.MoviesDatabase
 import com.example.major_assignment2.model.Movies
-import com.example.major_assignment2.ui.activity.AddMovieActivity
 import com.example.major_assignment2.ui.adapter.MoviesAdapter
 import com.example.major_assignment2.ui.interfaces.MoviesInterface
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
 
 class MoviesFragment : Fragment(), MoviesInterface {
 
     private var movies = ArrayList<Movies>()
-    private lateinit var moviesViewModel: MoviesViewModel
+    private val moviesDatabase by lazy { MoviesDatabase.getDatabaseInstance(requireActivity()).moviesDao() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,19 +32,23 @@ class MoviesFragment : Fragment(), MoviesInterface {
         val fbAddMovie = root.findViewById<FloatingActionButton>(R.id.fbAddMovie)
 
         populateRecyclerView(recycler)
+        observeMovies()
+        observeMoviesData()
         fbAddMovie.setOnClickListener {
-            val intent = Intent(context, AddMovieActivity::class.java)
-            startActivity(intent)
+            val newMovie = com.example.major_assignment2.database.Movies(
+                1,
+                "The Forest 2",
+                "Gibili 2",
+                "",
+                "7.7"
+            )
+            lifecycleScope.launch {
+                moviesDatabase.addMovie(newMovie)
+            }
+
+            /*val intent = Intent(context, AddMovieActivity::class.java)
+            startActivity(intent)*/
         }
-
-      /*  moviesViewModel = ViewModelProviders.of(this)[MoviesViewModel::class.java]
-
-        moviesViewModel.getAllMovies().observe(context, Observer {
-            Log.d("Movies observed", "$it")
-            Log.d("Movies observed 222", "")
-
-            //adapter.submitList(it)
-        })*/
 
         return root
     }
@@ -57,6 +60,27 @@ class MoviesFragment : Fragment(), MoviesInterface {
     companion object {
         fun getInstance(): Fragment {
             return MoviesFragment()
+        }
+    }
+
+    private fun observeMovies() {
+        lifecycleScope.launch {
+            moviesDatabase.getMovies().collect { moviesList ->
+                if (moviesList.isNotEmpty()) {
+                    Log.d("moviesList:::::: ", moviesList.toString())
+                }
+            }
+        }
+    }
+
+    private fun observeMoviesData() {
+        lifecycleScope.launch {
+            moviesDatabase.getMovies().collect { moviesList ->
+                if (moviesList.isNotEmpty()) {
+                    Log.d("moviesList Json Data: ", moviesList.toString())
+//                    adapter.submitList(notesList)
+                }
+            }
         }
     }
 

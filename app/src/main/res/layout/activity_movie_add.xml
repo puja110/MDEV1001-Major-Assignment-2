@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:gravity="center">
 
-        <TextView
+        <!--<TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,6 +25,12 @@
             android:textSize="24dp"
             android:textColor="@color/primaryDarkColor"
             tools:layout_editor_absoluteX="172dp"
-            tools:layout_editor_absoluteY="330dp" />
+            tools:layout_editor_absoluteY="330dp" />-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAddMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add movie"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

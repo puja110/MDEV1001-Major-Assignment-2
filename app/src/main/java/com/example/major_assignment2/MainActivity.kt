@@ -2,12 +2,16 @@ package com.example.major_assignment2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.major_assignment2.database.MoviesDatabase
 import com.example.major_assignment2.ui.fragment.MoviesFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //instance of database
+        val noteDatabase = MoviesDatabase.getDatabaseInstance(this)
 
         val fragment = MoviesFragment.getInstance()
         supportFragmentManager.beginTransaction()
