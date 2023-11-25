@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class MoviesFragment : Fragment(), MoviesInterface {
 
     private var movies = ArrayList<Movies>()
-    private val moviesDatabase by lazy { MoviesDatabase.getDatabaseInstance(requireActivity()).moviesDao() }
+    private val moviesDatabase by lazy { MoviesDatabase.getDatabaseInstance(requireActivity())?.moviesDao }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +35,16 @@ class MoviesFragment : Fragment(), MoviesInterface {
         observeMovies()
         observeMoviesData()
         fbAddMovie.setOnClickListener {
-            val newMovie = com.example.major_assignment2.database.Movies(
-                1,
-                "The Forest 2",
-                "Gibili 2",
-                "",
-                "7.7"
-            )
-            lifecycleScope.launch {
-                moviesDatabase.addMovie(newMovie)
-            }
+//            val newMovie = com.example.major_assignment2.database.Movies(
+//                1,
+//                "The Forest 2",
+//                "Gibili 2",
+//                "",
+//                "7.7"
+//            )
+//            lifecycleScope.launch {
+//                moviesDatabase?.addMovie(newMovie)
+//            }
 
             /*val intent = Intent(context, AddMovieActivity::class.java)
             startActivity(intent)*/
@@ -65,7 +65,7 @@ class MoviesFragment : Fragment(), MoviesInterface {
 
     private fun observeMovies() {
         lifecycleScope.launch {
-            moviesDatabase.getMovies().collect { moviesList ->
+            moviesDatabase?.getMovies()?.collect { moviesList ->
                 if (moviesList.isNotEmpty()) {
                     Log.d("moviesList:::::: ", moviesList.toString())
                 }
@@ -75,7 +75,7 @@ class MoviesFragment : Fragment(), MoviesInterface {
 
     private fun observeMoviesData() {
         lifecycleScope.launch {
-            moviesDatabase.getMovies().collect { moviesList ->
+            moviesDatabase?.getMovies()?.collect { moviesList ->
                 if (moviesList.isNotEmpty()) {
                     Log.d("moviesList Json Data: ", moviesList.toString())
 //                    adapter.submitList(notesList)

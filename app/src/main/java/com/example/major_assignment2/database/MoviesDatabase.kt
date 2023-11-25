@@ -75,7 +75,7 @@ abstract class MoviesDatabase : RoomDatabase() {
 //    }
 //}
 
-@Database(entities = [Movies::class], version = 1, exportSchema = true)
+/*@Database(entities = [Movies::class], version = 1, exportSchema = true)
 abstract class MoviesDatabase : RoomDatabase() {
     abstract fun moviesDao(): MoviesDao
 
@@ -97,6 +97,31 @@ abstract class MoviesDatabase : RoomDatabase() {
                 }
                 return instance!!
             }
+        }
+    }
+}*/
+
+@Database(entities = [Movies::class], version = 1)
+abstract class MoviesDatabase : RoomDatabase() {
+    abstract val moviesDao:MoviesDao
+
+    companion object{
+        @Volatile
+        private var instance: MoviesDatabase? = null
+
+        fun getDatabaseInstance(context: Context): MoviesDatabase?{
+            if (instance == null){
+                synchronized(MoviesDatabase::class.java){
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        MoviesDatabase::class.java,
+                        "movies_database"
+                    )
+                        .addCallback(ImportMovies(context))
+                        .build()
+                }
+            }
+            return instance
         }
     }
 }

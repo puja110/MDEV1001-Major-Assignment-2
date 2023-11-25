@@ -23,7 +23,7 @@ class PrepopulateMoviesCallback(private val context: Context) : RoomDatabase.Cal
 //    suspend fun prePopulateUsers(context: Context) {
     fun prePopulateUsers(context: Context) {
         try {
-            val userDao = MoviesDatabase.getDatabaseInstance(context).moviesDao()
+            val userDao = MoviesDatabase.getDatabaseInstance(context)?.moviesDao
 
             val userList: JSONArray =
                 context.resources.openRawResource(R.raw.movies).bufferedReader().use {
@@ -33,15 +33,15 @@ class PrepopulateMoviesCallback(private val context: Context) : RoomDatabase.Cal
             userList.takeIf { it.length() > 0 }?.let { list ->
                 for (index in 0 until list.length()) {
                     val userObj = list.getJSONObject(index)
-                    userDao.insertMovie(
-                        Movies(
-                            userObj.getInt("id"),
-                            userObj.getString("movie_title"),
-                            userObj.getString("studio"),
-                            userObj.getString("thumbnail"),
-                            userObj.getString("critics_rating")
-                            )
-                    )
+//                    userDao?.insertMovie(
+//                        Movies(
+//                            userObj.getInt("id"),
+//                            userObj.getString("movie_title"),
+//                            userObj.getString("studio"),
+//                            userObj.getString("thumbnail"),
+//                            userObj.getString("critics_rating")
+//                            )
+//                    )
 
                 }
                 Log.e("User App", "successfully pre-populated users into database")

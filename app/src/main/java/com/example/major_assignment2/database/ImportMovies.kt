@@ -23,7 +23,7 @@ class ImportMovies(private val context: Context) : RoomDatabase.Callback() {
     //Filling database with the data from JSON
     private suspend fun fillWithStartingNotes(context: Context){
         //obtaining instance of data access object
-        val dao = MoviesDatabase.getDatabaseInstance(context)?.moviesDao()
+        val dao = MoviesDatabase.getDatabaseInstance(context)?.moviesDao
 
         // using try catch to load the necessary data
         try {
@@ -35,12 +35,15 @@ class ImportMovies(private val context: Context) : RoomDatabase.Callback() {
                     //variable to obtain the JSON object
                     val item = notes.getJSONObject(i)
                     //Using the JSON object to assign data
-                    val noteTitle = item.getString("note-title")
-                    val notesDescription = item.getString("note-description")
+                    val id = item.getInt("id")
+                    val movieTitle = item.getString("movieTitle")
+                    val movieStudio= item.getString("studio")
+                    val movieThumbnail = item.getString("thumbnail")
+                    val movieCriticsRating = item.getString("criticsRating")
 
                     //data loaded to the entity
                     val noteEntity = Movies(
-                        1,"movie", "studio", "", "9.0"
+                        id, movieTitle, movieStudio, movieThumbnail, movieCriticsRating
                     )
 
                     //using dao to insert data to the database

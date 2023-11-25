@@ -6,11 +6,19 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "movies_table")
 data class Movies(
-    @PrimaryKey
-    @ColumnInfo(name = "id") val id: Int?,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int?,
     @ColumnInfo(name = "movie_title") val movieTitle: String?,
     @ColumnInfo(name = "studio") val studio: String?,
     @ColumnInfo(name = "thumbnail") val thumbnail: String?,
-    @ColumnInfo(name = "critics_rating") val criticsRating: String?
+    @ColumnInfo(name = "critics_rating") val criticsRating: String?,
 )
 
+//@Entity(tableName = "movies_table")
+//
+//data class Movies(
+//    val noteTitle:String,
+//    val noteDescription:String,
+//    @PrimaryKey(autoGenerate = true)
+//    var id: Long = 0,
+//)

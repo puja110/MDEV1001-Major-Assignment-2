@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class AddMovieActivity : AppCompatActivity() {
 
-    private val moviesDatabase by lazy { MoviesDatabase.getDatabaseInstance(this).moviesDao() }
+    private val moviesDatabase by lazy { MoviesDatabase.getDatabaseInstance(this)?.moviesDao }
 
     /*private lateinit var moviesViewModel: MoviesViewModel*/
 
@@ -41,10 +41,10 @@ class AddMovieActivity : AppCompatActivity() {
 //            val noteDateAdded = Date()
 //            val noteText = result.data?.getStringExtra("note_text")
             // Add the new note at the top of the list
-            val newMovie = Movies(1,"The Forest 2", "Gibili 2", "", "7.7")
-            lifecycleScope.launch {
-                moviesDatabase.addMovie(newMovie)
-            }
+//            val newMovie = Movies(1,"The Forest 2", "Gibili 2", "", "7.7")
+//            lifecycleScope.launch {
+//                moviesDatabase?.addMovie(newMovie)
+//            }
         }
         /*moviesDao = database.moviesDao()
         allMovies = moviesDao?.getAllMovies()*/
@@ -60,7 +60,7 @@ class AddMovieActivity : AppCompatActivity() {
 
     private fun observeMovies() {
         lifecycleScope.launch {
-            moviesDatabase.getMovies().collect { moviesList ->
+            moviesDatabase?.getMovies()?.collect { moviesList ->
                 if (moviesList.isNotEmpty()) {
                     Log.d("moviesList:::::: ", moviesList.toString())
 //                    adapter.submitList(notesList)
