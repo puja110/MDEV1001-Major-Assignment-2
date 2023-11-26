@@ -1,0 +1,29 @@
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+    private List<Movie> movies;
+    // Constructor and ViewHolder implementation
+
+    @Override
+    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
+        Movie movie = movies.get(position);
+        // Bind movie data to the ViewHolder
+        holder.bind(movie);
+    }
+
+    // Other necessary overrides
+}
+public class MovieListActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private MovieAdapter adapter;
+    private List<Movie> movieList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // Set up RecyclerView, LayoutManager, and Adapter
+        // Fetch movie data from the Room database
+        // Set adapter to RecyclerView
+        // Implement Add/Edit navigation
+        // Implement Edit/Delete interactions
+    }
+
+    // Other necessary methods
+}

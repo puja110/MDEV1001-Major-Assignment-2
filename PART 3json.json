@@ -1,0 +1,39 @@
+public class AddEditActivity extends AppCompatActivity {
+    private EditText titleEditText, studioEditText, thumbnailEditText, ratingEditText;
+    private Button saveButton, cancelButton;
+    private MovieDatabase movieDatabase;
+    private boolean isEditMode = false;
+    private Movie editingMovie;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // Set up layout elements: EditText fields for movie details, buttons
+        // Fetch movie data from intent extras (if in edit mode)
+        // Populate EditText fields with existing movie details if in edit mode
+        // Implement Save button functionality to update or add movie to the database
+        // Implement Cancel button functionality to navigate back to Movie List Screen
+    }
+
+    // Other necessary methods
+}
+<!-- Define EditText fields, buttons, labels for movie details -->
+<!-- Example: -->
+<EditText
+    android:id="@+id/titleEditText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Title"/>
+
+<!-- Other EditText fields for studio, thumbnail URL, critics rating -->
+
+<Button
+    android:id="@+id/saveButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Save"/>
+
+<Button
+    android:id="@+id/cancelButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Cancel"/>

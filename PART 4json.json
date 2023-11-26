@@ -1,0 +1,22 @@
+// Setting margins for a view programmatically
+View view = findViewById(R.id.your_view_id);
+ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+params.setMargins(16, 8, 16, 8); // left, top, right, bottom
+view.setLayoutParams(params);
+
+// Setting padding for a view programmatically
+view.setPadding(16, 8, 16, 8); // left, top, right, bottom
+// Setting text color programmatically
+TextView textView = findViewById(R.id.your_text_view_id);
+textView.setTextColor(getResources().getColor(R.color.your_text_color));
+
+// Changing background color of a view programmatically
+view.setBackgroundColor(getResources().getColor(R.color.your_background_color));
+// Setting width and height programmatically
+view.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+view.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+view.requestLayout(); // Apply changes to the layout
+// Setting a custom font for a TextView
+TextView textView = findViewById(R.id.your_text_view_id);
+Typeface typeface = Typeface.createFromAsset(getAssets(), "your_font.ttf");
+textView.setTypeface(typeface);

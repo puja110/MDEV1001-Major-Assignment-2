@@ -1,0 +1,47 @@
+@Entity(tableName = "movies")
+public class Movie {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    private String title;
+    private String studio;
+    private String posterThumbnailUrl;
+    private double criticsRating;
+
+    // Constructors, getters, setters
+}
+@Dao
+public interface MovieDao {
+    @Insert
+    void insertMovie(Movie movie);
+
+    @Query("SELECT * FROM movies")
+    LiveData<List<Movie>> getAllMovies();
+
+    // Other CRUD operations
+}
+@Database(entities = {Movie.class}, version = 1)
+public abstract class MovieDatabase extends RoomDatabase {
+    public abstract MovieDao movieDao();
+
+    private static volatile MovieDatabase INSTANCE;
+
+    public static MovieDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (MovieDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                            MovieDatabase.class, "movie_database")
+                            .build();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+}
+// Inside your activity or ViewModel
+MovieDatabase db = MovieDatabase.getDatabase(context);
+List<Movie> movies = // Convert and fetch movies from CSV/JSON
+for (Movie movie : movies) {
+    db.movieDao().insertMovie(movie);
+}
