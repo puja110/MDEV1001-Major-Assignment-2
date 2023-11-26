@@ -12,7 +12,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import java.io.BufferedReader
 
-class ImportMovies(private val context: Context) : RoomDatabase.Callback() {
+class ImportMoviesCallback(private val context: Context) : RoomDatabase.Callback() {
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
         CoroutineScope(Dispatchers.IO).launch {
@@ -42,7 +42,7 @@ class ImportMovies(private val context: Context) : RoomDatabase.Callback() {
                     val movieCriticsRating = item.getString("criticsRating")
 
                     //data loaded to the entity
-                    val noteEntity = Movies(
+                    val noteEntity = MoviesEntity(
                         id, movieTitle, movieStudio, movieThumbnail, movieCriticsRating
                     )
 

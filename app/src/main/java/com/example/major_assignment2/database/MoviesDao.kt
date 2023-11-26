@@ -6,35 +6,24 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MoviesDao {
 
-    @Query("SELECT * FROM movies_table")
-    fun getMoviesData() : Flow<List<Movies>>
-
-    @Query("SELECT * FROM movies_table ORDER BY id DESC")
-    fun getMovies(): Flow<List<Movies>>
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addMovie(movie: Movies)
+    suspend fun addMovie(movie: MoviesEntity)
 
     @Query("SELECT * FROM movies_table ORDER BY id ASC")
-    fun realAllMoviesData(): LiveData<List<Movies>>
+    fun realAllMoviesData(): LiveData<List<MoviesEntity>>
 
-    @Query("SELECT * FROM movies_table")
-    fun getAllMovies() : LiveData<List<Movies>>
-
-//    @Query("SELECT * FROM movies_table WHERE uid IN (:moviesIds)")
-//    fun loadAllMoviesByIds(moviesIds: IntArray): List<Movies>
-
-    @Insert
-    fun insertMovie(movies: Movies)
-
-    @Insert
-    suspend  fun insertMoviesList(movies : List<Movies>)
+    @Update
+    suspend fun updateMovie(movie: MoviesEntity)
 
     @Delete
-    fun deleteMovie(movies: Movies)
+    suspend fun deleteMovie(moviesEntity: MoviesEntity)
+
+    /*@Query("SELECT * FROM movies_table ORDER BY id DESC")
+    fun getMovies(): Flow<List<MoviesEntity>>*/
 }
