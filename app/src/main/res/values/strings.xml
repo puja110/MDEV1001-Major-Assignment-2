@@ -4,4 +4,8 @@
     <string name="email">Email</string>
     <string name="required">Required</string>
     <string name="password">Password</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="Studio_name">Studio Name\n</string>
+    <string name="studio_name">Studio Name</string>
+    <string name="rating">Rating</string>
 </resources>
