@@ -21,8 +21,8 @@
         android:fontFamily="sans-serif-medium"
         android:text="Add New Movie"
         android:textColor="#ffffff"
-        android:textSize="30dp"
-        android:layout_marginTop="26dp"
+        android:textSize="20dp"
+        android:layout_marginTop="35dp"
         />
 
     <LinearLayout
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif-medium"
@@ -146,22 +146,21 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnAddMovie"
-            android:layout_width="120dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="156dp"
-            android:layout_marginEnd="12dp"
-            android:backgroundTint="#e2e2e2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
             android:fontFamily="sans-serif-medium"
+            android:shadowRadius="@integer/material_motion_duration_long_2"
             android:text="Add"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:shadowColor="@color/black"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -13,7 +13,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#DBF6FA"
+        android:background="#D3DBF6FA"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
@@ -34,7 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="55dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

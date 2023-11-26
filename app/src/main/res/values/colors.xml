@@ -5,9 +5,9 @@
 <!--    <color name="primaryColor">#3D2A61</color>-->
 <!--    <color name="primaryAccentColor">#FFC107</color>-->
 <!--    <color name="primaryDarkColor">#251445</color>-->
-    <color name="primaryColor">#267C87</color>
+    <color name="primaryColor">#06A4B8</color>
     <color name="primaryAccentColor">#FFC107</color>
-    <color name="primaryDarkColor">#267C87</color>
+    <color name="primaryDarkColor">#0A90A1</color>
     <color name="green">#07E310</color>
     <color name="red">#A11C27</color>
 </resources>
