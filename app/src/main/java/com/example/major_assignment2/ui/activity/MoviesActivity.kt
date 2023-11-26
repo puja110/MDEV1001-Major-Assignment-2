@@ -1,5 +1,6 @@
 package com.example.major_assignment2.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -36,7 +37,7 @@ class MoviesActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, myViewModelFactory).get(MainViewModel::class.java)
 
         binding.floatingActionButton.setOnClickListener {
-            val random = kotlin.math.abs((0..999999999999).random())
+            /*val random = kotlin.math.abs((0..999999999999).random())
             Log.d("random number: ", random.toString())
             val newMovie = MoviesEntity(
                 100, //Add randomly generated 3 digit Integer here
@@ -47,7 +48,10 @@ class MoviesActivity : AppCompatActivity() {
             )
             lifecycleScope.launch {
                 viewModel.addMovie(newMovie)
-            }
+            }*/
+
+            val intent = Intent(this, AddMovieActivity::class.java)
+            startActivity(intent)
         }
 
         //submitting data to the adapter which the maps it to recyclerview
