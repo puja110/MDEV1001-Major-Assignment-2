@@ -1,6 +1,7 @@
-package com.example.major_assignment2.adapter
+package com.example.major_assignment2.ui.adapter
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -35,22 +36,27 @@ class MoviesListAdapter(
 
     }
     inner class MyHolder(private val binding: MoviesRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(post: MoviesEntity?) {
-            Glide.with(context)
-                .load(post?.thumbnail)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(binding.ivMovieImage)
-            binding.tvMovieTitle.text = post?.movieTitle
-            binding.tvMovieStudio.text = post?.studio
-            binding.tvMovieRating.text = post?.criticsRating
+        fun bind(data: MoviesEntity?) {
+            if (data?.thumbnail?.contains("https") == true || data?.thumbnail?.contains("http") == true
+            ) {
+                Glide.with(context)
+                    .load(data.thumbnail)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.ivMovieImage)
+            } else {
+                Glide.with(context)
+                    .load(Uri.parse(data?.thumbnail))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.ivMovieImage)
+            }
+            binding.tvMovieTitle.text = data?.movieTitle
+            binding.tvMovieStudio.text = data?.studio
+            binding.tvMovieRating.text = data?.criticsRating
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         val v = MyHolder(MoviesRowBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-
-//        val v = LayoutInflater.from(parent.context).inflate(R.layout.movies_row, parent, false)
-//         val noteHolder = MyHolder(v)
 
          val movieDelete = v.itemView.findViewById<TextView>(R.id.btnDelete)
         movieDelete.setOnClickListener {

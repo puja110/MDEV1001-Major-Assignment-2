@@ -4,28 +4,22 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.widget.Button
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.major_assignment2.R
-import com.example.major_assignment2.adapter.MoviesListAdapter
 import com.example.major_assignment2.database.MoviesDatabase
 import com.example.major_assignment2.database.MoviesEntity
 import com.example.major_assignment2.databinding.ActivityMoviesBinding
+import com.example.major_assignment2.ui.adapter.MoviesListAdapter
 import com.example.major_assignment2.ui.interfaces.RecyclerClickListener
 import com.example.major_assignment2.viewmodel.MainViewModel
 import com.example.major_assignment2.viewmodel.MyViewModelFactory
 import kotlinx.coroutines.launch
-import java.util.Date
-import java.util.concurrent.Flow
-
 
 class MoviesActivity : AppCompatActivity() {
 
@@ -47,19 +41,6 @@ class MoviesActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, myViewModelFactory)[MainViewModel::class.java]
 
         binding.floatingActionButton.setOnClickListener {
-            /*val random = kotlin.math.abs((0..999999999999).random())
-            Log.d("random number: ", random.toString())
-            val newMovie = MoviesEntity(
-                100, //Add randomly generated 3 digit Integer here
-                "The Forest 2",
-                "Gibili 2",
-                "",
-                "7.7"
-            )
-            lifecycleScope.launch {
-                viewModel.addMovie(newMovie)
-            }*/
-
             val intent = Intent(this, AddMovieActivity::class.java)
             startActivity(intent)
         }
@@ -85,12 +66,14 @@ class MoviesActivity : AppCompatActivity() {
 
                 // Tap the note to go to detail page.
                 override fun onItemClick(position: Int) {
-                    Log.d("onItemClick: ", position.toString())
-                    /*val intent = Intent(this@NotesActivity, AddNoteActivity::class.java)
-                    val notesList = adapter.currentList.toMutableList()
-                    intent.putExtra("note_date_added", notesList[position].dateAdded)
-                    intent.putExtra("note_text", notesList[position].noteText)
-                    editNoteResultLauncher.launch(intent)*/
+                    val intent = Intent(this@MoviesActivity, EditMovieActivity::class.java)
+                    val moviesList = adapter.currentList.toMutableList()
+                    intent.putExtra("id", moviesList[position].id)
+                    intent.putExtra("title", moviesList[position].movieTitle)
+                    intent.putExtra("studio", moviesList[position].studio)
+                    intent.putExtra("rating", moviesList[position].criticsRating)
+                    intent.putExtra("thumbnail", moviesList[position].thumbnail)
+                    editNoteResultLauncher.launch(intent)
                 }
 
                 // Tap the note to edit.
@@ -98,6 +81,10 @@ class MoviesActivity : AppCompatActivity() {
                     val intent = Intent(this@MoviesActivity, EditMovieActivity::class.java)
                     val moviesList = adapter.currentList.toMutableList()
                     intent.putExtra("id", moviesList[position].id)
+                    intent.putExtra("title", moviesList[position].movieTitle)
+                    intent.putExtra("studio", moviesList[position].studio)
+                    intent.putExtra("rating", moviesList[position].criticsRating)
+                    intent.putExtra("thumbnail", moviesList[position].thumbnail)
                     editNoteResultLauncher.launch(intent)
                 }
             })

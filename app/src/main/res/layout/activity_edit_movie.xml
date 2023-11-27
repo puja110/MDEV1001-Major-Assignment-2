@@ -15,28 +15,19 @@
         android:layout_height="wrap_content"
         android:theme="@style/ToolBarStyle"/>
 
-    <TextView
-        android:id="@+id/AddNewMovie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="sans-serif-medium"
-        android:text="Update Movie"
-        android:textColor="#ffffff"
-        android:textSize="20dp"
-        android:layout_marginTop="35dp"
-        />
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:gravity="center">
 
-        <!--       <ImageView-->
-        <!--           android:layout_width="100dp"-->
-        <!--           android:layout_height="70dp"-->
-        <!--           android:scr="" />-->
+        <ImageView
+            android:id="@+id/ivMovieImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"/>
 
     </LinearLayout>
 
@@ -45,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif-medium"
@@ -54,6 +45,7 @@
         android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMovieTitle"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxBackgroundColor="#ffffff"
         android:layout_marginHorizontal="20dp"
@@ -90,6 +82,7 @@
         android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMovieStudio"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxBackgroundColor="#ffffff"
         android:layout_marginHorizontal="20dp"
@@ -126,6 +119,7 @@
         android:textSize="20sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMovieRating"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxBackgroundColor="#ffffff"
         android:layout_marginHorizontal="20dp"
@@ -143,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Enter movie critics rating"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:lines="1"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -151,7 +145,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUpdateMovie"
@@ -161,6 +156,19 @@
             android:fontFamily="sans-serif-medium"
             android:shadowRadius="@integer/material_motion_duration_long_2"
             android:text="Update"
+            android:layout_marginEnd="70dp"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancelEditMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:shadowRadius="@integer/material_motion_duration_long_2"
+            android:text="cancel"
             android:textColor="@color/white"
             android:shadowColor="@color/black"
             android:textAlignment="center"

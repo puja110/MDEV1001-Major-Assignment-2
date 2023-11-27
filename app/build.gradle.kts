@@ -65,4 +65,5 @@ dependencies {
 
     //timber
     implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.github.Drjacky:ImagePicker:2.3.22")
 }

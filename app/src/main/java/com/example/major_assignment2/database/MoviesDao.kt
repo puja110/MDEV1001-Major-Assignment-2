@@ -23,7 +23,4 @@ interface MoviesDao {
 
     @Delete
     suspend fun deleteMovie(moviesEntity: MoviesEntity)
-
-    /*@Query("SELECT * FROM movies_table ORDER BY id DESC")
-    fun getMovies(): Flow<List<MoviesEntity>>*/
 }

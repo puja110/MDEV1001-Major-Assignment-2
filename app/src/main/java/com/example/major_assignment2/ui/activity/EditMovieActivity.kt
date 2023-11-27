@@ -1,54 +1,71 @@
 package com.example.major_assignment2.ui.activity
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
-import android.view.animation.DecelerateInterpolator
-import android.widget.LinearLayout
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.Toolbar
-import androidx.core.graphics.ColorUtils
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.major_assignment2.R
 import com.example.major_assignment2.database.MoviesDatabase
 import com.example.major_assignment2.database.MoviesEntity
 import com.example.major_assignment2.viewmodel.MainViewModel
 import com.example.major_assignment2.viewmodel.MyViewModelFactory
-import kotlinx.coroutines.launch
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class EditMovieActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var containerWindow: LinearLayoutCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_movie)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        val tilMovieTitle = findViewById<TextInputLayout>(R.id.tilMovieTitle)
         val etTitle: AppCompatEditText = findViewById(R.id.etMovieTitle)
+        val tilMovieStudio = findViewById<TextInputLayout>(R.id.tilMovieStudio)
         val etStudio: AppCompatEditText = findViewById(R.id.etMovieStudio)
+        val tilMovieRating = findViewById<TextInputLayout>(R.id.tilMovieRating)
         val etCriticsRating: AppCompatEditText = findViewById(R.id.etMovieCriticsRating)
+        val ivMovieImage: ImageView = findViewById(R.id.ivMovieImage)
         val btnUpdateMovie: AppCompatButton = findViewById(R.id.btnUpdateMovie)
-        containerWindow = findViewById<LinearLayoutCompat>(R.id.containerWindow)
-        setSupportActionBar(toolbar)
+        val btnCancelEditMovie: AppCompatButton = findViewById(R.id.btnCancelEditMovie)
 
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = "Update Movie"
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.primaryDarkColor)))
 
         val id = intent.getIntExtra("id", 1)
+        val title = intent.getStringExtra("title")
+        val studio = intent.getStringExtra("studio")
+        val rating = intent.getStringExtra("rating")
+        val thumbnail = intent.getStringExtra("thumbnail")
+
+        //setting texts to views
+        etTitle.setText(title)
+        etStudio.setText(studio)
+        etCriticsRating.setText(rating)
+
+        //set image to imageview
+        Glide.with(applicationContext)
+            .load(thumbnail)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(ivMovieImage)
 
         //instance of database
         val moviesDatabase = MoviesDatabase.getDatabaseInstance(this)
@@ -57,59 +74,45 @@ class EditMovieActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, myViewModelFactory)[MainViewModel::class.java]
 
         btnUpdateMovie.setOnClickListener {
-            // Return updated movie text to the MoviesActivity
-            val data = Intent()
-            data.putExtra("id", id)
-            data.putExtra("movie_title", etTitle.text.toString())
-            data.putExtra("movie_studio", etStudio.text.toString())
-            data.putExtra("movie_rating", etCriticsRating.text.toString())
-            setResult(Activity.RESULT_OK, data)
-            // Close current window
-            onBackPressed()
-        }
-    }
+            val title = etTitle.text.toString()
+            val studio = etStudio.text.toString()
+            val rating = etCriticsRating.text.toString()
 
-    /*override fun finish() {
-        val returnIntent = Intent()
-        returnIntent.putExtra("passed_item", itemYouJustCreated)
-        // setResult(RESULT_OK);
-        setResult(
-            RESULT_OK,
-            returnIntent
-        ) //By not passing the intent in the result, the calling activity will get null data.
-        super.finish()
-    }*/
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        // Fade animation for the background of Popup Window when you press the back button
-       /* val alpha = 100 // between 0-255
-        val alphaColor = ColorUtils.setAlphaComponent(Color.parseColor("#000000"), alpha)
-        val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), alphaColor, Color.TRANSPARENT)
-        colorAnimation.duration = 500 // milliseconds
-        colorAnimation.addUpdateListener { animator ->
-            containerWindow.setBackgroundColor(
-                animator.animatedValue as Int
-            )
-        }
-
-        // Fade animation for the Popup Window when you press the back button
-        containerWindow.animate().alpha(0f).setDuration(500).setInterpolator(
-            DecelerateInterpolator()
-        ).start()
-
-        // After animation finish, close the Activity
-        colorAnimation.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                finish()
-                overridePendingTransition(0, 0)
+            if (title.isEmpty()) {
+                tilMovieTitle.error = "Movie title field cannot be empty!"
+            } else if (studio.isEmpty()) {
+                tilMovieStudio.error = "Studio field cannot be empty!"
+            } else if (rating.isEmpty()) {
+                tilMovieRating.error = "Rating field cannot be emtpty!"
+            } else {
+                // Return updated movie data to the MoviesActivity
+                val data = Intent()
+                data.putExtra("id", id)
+                data.putExtra("movie_title", etTitle.text.toString())
+                data.putExtra("movie_studio", etStudio.text.toString())
+                data.putExtra("movie_rating", etCriticsRating.text.toString())
+                setResult(Activity.RESULT_OK, data)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    Toast.makeText(this, "Movie Updated successfully!", Toast.LENGTH_LONG).show()
+                    onBackPressedDispatcher.onBackPressed()
+                }, 1200)
             }
-        })
-        colorAnimation.start()*/
+        }
+
+        btnCancelEditMovie.setOnClickListener {
+            etTitle.text?.clear()
+            etStudio.text?.clear()
+            etCriticsRating.text?.clear()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, MoviesActivity::class.java)
+                startActivity(intent)
+            }, 500)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-//        onBackPressed()
+        onBackPressed()
         return true
     }
 }
