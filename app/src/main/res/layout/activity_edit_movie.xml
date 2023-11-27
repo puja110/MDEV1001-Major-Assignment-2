@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/containerWindow"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="#1c9e9a"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,18 +15,164 @@
         android:layout_height="wrap_content"
         android:theme="@style/ToolBarStyle"/>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivMovieImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Movie Title"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMovieTitle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxBackgroundColor="#ffffff"
+        android:layout_marginHorizontal="20dp"
+        app:helperText="this field is required"
+        app:helperTextTextColor="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMovieTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
-        <TextView
-            android:id="@+id/textView"
+            android:lines="1"
+            android:inputType="textAutoComplete"
+            android:textSize="16sp"
+            android:hint="Enter movie title"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/Movie_Studio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Studio"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMovieStudio"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxBackgroundColor="#ffffff"
+        android:layout_marginHorizontal="20dp"
+        app:helperText="this field is required"
+        app:helperTextTextColor="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMovieStudio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:textSize="16sp"
+            android:inputType="textAutoComplete"
+            android:hint="Enter movie studio"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/Movie_Rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Rating"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMovieRating"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxBackgroundColor="#ffffff"
+        android:layout_marginHorizontal="20dp"
+        app:helperText="this field is required"
+        app:helperTextTextColor="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMovieCriticsRating"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter movie critics rating"
+            android:inputType="numberDecimal"
+            android:lines="1"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnUpdateMovie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Movie Activity"
-            android:textSize="24dp"
-            android:textColor="@color/primaryDarkColor"
-            tools:layout_editor_absoluteX="172dp"
-            tools:layout_editor_absoluteY="330dp" />
+            android:backgroundTint="@color/green"
+            android:fontFamily="sans-serif-medium"
+            android:shadowRadius="@integer/material_motion_duration_long_2"
+            android:text="Update"
+            android:layout_marginEnd="70dp"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancelEditMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:shadowRadius="@integer/material_motion_duration_long_2"
+            android:text="cancel"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>
