@@ -16,24 +16,24 @@ class ImportMoviesCallback(private val context: Context) : RoomDatabase.Callback
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
         CoroutineScope(Dispatchers.IO).launch {
-            fillWithStartingNotes(context)
+            fillWithImportingMovies(context)
         }
     }
 
-    //Filling database with the data from JSON
-    private suspend fun fillWithStartingNotes(context: Context){
+    // importing movie JSON file in the database
+    private suspend fun fillWithImportingMovies(context: Context){
         //obtaining instance of data access object
         val dao = MoviesDatabase.getDatabaseInstance(context)?.moviesDao
 
         // using try catch to load the necessary data
         try {
             //creating variable that holds the loaded data
-            val notes = loadJSONArray(context)
-            if (notes != null){
+            val movies = loadJSONArray(context)
+            if (movies != null){
                 //looping through the variable as specified fields are loaded with data
-                for (i in 0 until notes.length()){
+                for (i in 0 until movies.length()){
                     //variable to obtain the JSON object
-                    val item = notes.getJSONObject(i)
+                    val item = movies.getJSONObject(i)
                     //Using the JSON object to assign data
                     val id = item.getInt("id")
                     val movieTitle = item.getString("movieTitle")
@@ -42,18 +42,18 @@ class ImportMoviesCallback(private val context: Context) : RoomDatabase.Callback
                     val movieCriticsRating = item.getString("criticsRating")
 
                     //data loaded to the entity
-                    val noteEntity = MoviesEntity(
+                    val moviesEntity = MoviesEntity(
                         id, movieTitle, movieStudio, movieThumbnail, movieCriticsRating
                     )
 
                     //using dao to insert data to the database
-                    dao?.addMovie(noteEntity)
+                    dao?.addMovie(moviesEntity)
                 }
             }
         }
         //error when exception occurs
         catch (e: JSONException) {
-            Log.d("fillWithStartingNotes: ", e.toString())
+            Log.d("fillWithImportingMovies error: ", e.toString())
         }
     }
 

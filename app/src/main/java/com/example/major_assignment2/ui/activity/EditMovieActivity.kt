@@ -33,6 +33,8 @@ class EditMovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_movie)
+
+        // defining and initializing views
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         val tilMovieTitle = findViewById<TextInputLayout>(R.id.tilMovieTitle)
         val etTitle: AppCompatEditText = findViewById(R.id.etMovieTitle)
@@ -44,6 +46,7 @@ class EditMovieActivity : AppCompatActivity() {
         val btnUpdateMovie: AppCompatButton = findViewById(R.id.btnUpdateMovie)
         val btnCancelEditMovie: AppCompatButton = findViewById(R.id.btnCancelEditMovie)
 
+        // setting toolbar in the edit movie screen
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -73,6 +76,7 @@ class EditMovieActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, myViewModelFactory)[MainViewModel::class.java]
 
+        // adding validations and sending new movie data to execute update movie operation
         btnUpdateMovie.setOnClickListener {
             val title = etTitle.text.toString()
             val studio = etStudio.text.toString()
@@ -91,7 +95,9 @@ class EditMovieActivity : AppCompatActivity() {
                 data.putExtra("movie_title", etTitle.text.toString())
                 data.putExtra("movie_studio", etStudio.text.toString())
                 data.putExtra("movie_rating", etCriticsRating.text.toString())
+                data.putExtra("movie_thumbnail", thumbnail)
                 setResult(Activity.RESULT_OK, data)
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     Toast.makeText(this, "Movie Updated successfully!", Toast.LENGTH_LONG).show()
                     onBackPressedDispatcher.onBackPressed()
@@ -99,6 +105,7 @@ class EditMovieActivity : AppCompatActivity() {
             }
         }
 
+        // user will navigate to the movie list screen upon cancel button click
         btnCancelEditMovie.setOnClickListener {
             etTitle.text?.clear()
             etStudio.text?.clear()

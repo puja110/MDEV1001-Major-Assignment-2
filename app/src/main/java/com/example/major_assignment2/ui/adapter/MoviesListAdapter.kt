@@ -37,6 +37,7 @@ class MoviesListAdapter(
     }
     inner class MyHolder(private val binding: MoviesRowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: MoviesEntity?) {
+            // displaying movie image using Glide
             if (data?.thumbnail?.contains("https") == true || data?.thumbnail?.contains("http") == true
             ) {
                 Glide.with(context)
@@ -58,18 +59,22 @@ class MoviesListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         val v = MyHolder(MoviesRowBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
-         val movieDelete = v.itemView.findViewById<TextView>(R.id.btnDelete)
+        val movieDelete = v.itemView.findViewById<TextView>(R.id.btnDelete)
+        val movieEdit = v.itemView.findViewById<TextView>(R.id.btnUpdate)
+        val movieCard = v.itemView.findViewById<CardView>(R.id.movieCard)
+
+        // sending movie item position to operate deletion upon delete button click
         movieDelete.setOnClickListener {
-             listener.onItemRemoveClick(v.adapterPosition)
+             listener.onItemDeleteClick(v.adapterPosition)
          }
 
-        val movieEdit = v.itemView.findViewById<TextView>(R.id.btnUpdate)
+        // sending movie item position to operate update upon edit button click
         movieEdit.setOnClickListener {
             listener.onEditClick(v.adapterPosition)
         }
 
-         val note = v.itemView.findViewById<CardView>(R.id.movieCard)
-         note.setOnClickListener {
+        // sending movie item position upon movie item click
+        movieCard.setOnClickListener {
              listener.onItemClick(v.adapterPosition)
          }
         return v
