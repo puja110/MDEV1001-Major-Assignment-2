@@ -23,49 +23,52 @@ import kotlinx.coroutines.launch
 
 class MoviesActivity : AppCompatActivity() {
 
+    // defining activity binding, movie adapter and view model
     private lateinit var binding: ActivityMoviesBinding
     private val adapter by lazy { MoviesListAdapter(this) }
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // setContentView(R.layout.activity_main)
-
         binding = ActivityMoviesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //instance of database
+        // getting instance of database class
         val moviesDatabase = MoviesDatabase.getDatabaseInstance(this)
         val myViewModelFactory = MyViewModelFactory(moviesDatabase!!)
 
+        // initializing the viewmodel
         viewModel = ViewModelProvider(this, myViewModelFactory)[MainViewModel::class.java]
 
+        // this button navigates to the add new movie screen
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, AddMovieActivity::class.java)
             startActivity(intent)
         }
 
-        //submitting data to the adapter which the maps it to recyclerview
+        // submitting data to the adapter which the maps it to recyclerview
         viewModel.movies.observe(this, Observer { result ->
             adapter.submitList(result)
 
             adapter.setItemListener(object : RecyclerClickListener {
-
-                // Tap the 'X' to delete the note.
-                override fun onItemRemoveClick(position: Int) {
+                override fun onItemDeleteClick(position: Int) {
                     val moviesList = adapter.currentList.toMutableList()
                     val movieId = moviesList[position].id
                     val movieTitleText = moviesList[position].movieTitle
                     val movieStudioText = moviesList[position].studio
                     val movieThumbnail = moviesList[position].thumbnail
                     val movieRatingText = moviesList[position].criticsRating
+
+                    // sending data from the view to the database for the delete movie operation
                     val deleteMovie = MoviesEntity(movieId, movieTitleText, movieStudioText, movieThumbnail, movieRatingText)
-                    // adapter.notifyDataSetChanged()
+
+                    // show dialog message to user before movie delete
                     showDialog(position, moviesList, deleteMovie)
                 }
 
                 // Tap the note to go to detail page.
                 override fun onItemClick(position: Int) {
+                    // navigating to the edit movie screen
                     val intent = Intent(this@MoviesActivity, EditMovieActivity::class.java)
                     val moviesList = adapter.currentList.toMutableList()
                     intent.putExtra("id", moviesList[position].id)
@@ -73,11 +76,12 @@ class MoviesActivity : AppCompatActivity() {
                     intent.putExtra("studio", moviesList[position].studio)
                     intent.putExtra("rating", moviesList[position].criticsRating)
                     intent.putExtra("thumbnail", moviesList[position].thumbnail)
-                    editNoteResultLauncher.launch(intent)
+                    editMoviesResultLauncher.launch(intent)
                 }
 
                 // Tap the note to edit.
                 override fun onEditClick(position: Int) {
+                    // navigating to the edit movie screen
                     val intent = Intent(this@MoviesActivity, EditMovieActivity::class.java)
                     val moviesList = adapter.currentList.toMutableList()
                     intent.putExtra("id", moviesList[position].id)
@@ -85,16 +89,15 @@ class MoviesActivity : AppCompatActivity() {
                     intent.putExtra("studio", moviesList[position].studio)
                     intent.putExtra("rating", moviesList[position].criticsRating)
                     intent.putExtra("thumbnail", moviesList[position].thumbnail)
-                    editNoteResultLauncher.launch(intent)
+                    editMoviesResultLauncher.launch(intent)
                 }
             })
 
             binding.recyclerView.adapter = adapter
-            adapter.notifyDataSetChanged()
         })
     }
 
-    val editNoteResultLauncher =
+    val editMoviesResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // Get the edited movie from the AddMovieActivity
@@ -102,12 +105,13 @@ class MoviesActivity : AppCompatActivity() {
                 val title = result.data?.getStringExtra("movie_title")
                 val studio = result.data?.getStringExtra("movie_studio")
                 val rating = result.data?.getStringExtra("movie_rating")
-                // Update the movie in the list
-                val editMovie = MoviesEntity(id!!, title, studio, "https://hips.hearstapps.com/hmg-prod/images/the-matrix-1574173308.jpg?crop=1.00xw:0.941xh;0,0.0146xh&resize=2048:*", rating)
+                val thumbnail = result.data?.getStringExtra("movie_thumbnail")
+
+                // update the movie from the database
+                val editMovie = MoviesEntity(id!!, title, studio, thumbnail, rating)
                 lifecycleScope.launch {
                     viewModel.updateMovie(editMovie)
                 }
-                adapter.notifyDataSetChanged()
             }
         }
 
@@ -119,11 +123,15 @@ class MoviesActivity : AppCompatActivity() {
 
         val yesBtn = dialog.findViewById(R.id.btnOk) as Button
         yesBtn.setOnClickListener {
-            moviesList.removeAt(position)
-            adapter.submitList(moviesList)
+            // sending movie item to delete from the database
             lifecycleScope.launch {
                 viewModel.deleteMovie(deleteMovie)
             }
+
+            // removing deleted movie item from the movie list
+            moviesList.removeAt(position)
+            adapter.submitList(moviesList)
+
             dialog.dismiss()
         }
 
