@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val noteDatabase: MoviesDatabase) : ViewModel() {
 
-    val movies = noteDatabase.moviesDao.realAllMoviesData()
+    val movies = noteDatabase.moviesDao.getAllMoviesData()
 
     fun addMovie(noteEntity: MoviesEntity){
         viewModelScope.launch{

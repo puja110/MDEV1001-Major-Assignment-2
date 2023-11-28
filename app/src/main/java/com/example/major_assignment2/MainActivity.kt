@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // navigating to the movie listing screen
         val intent = Intent(this, MoviesActivity::class.java)
         startActivity(intent)
     }

@@ -33,6 +33,7 @@ class AddMovieActivity : AppCompatActivity() {
     private var mCameraUri: Uri? = null
     private var ivMovie: ImageView? = null
 
+    // getting image uri path to save ion the database table
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
@@ -59,6 +60,7 @@ class AddMovieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_add)
 
+        // defining and initializing views
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val btnAddMovie = findViewById<Button>(R.id.btnAddMovie)
         val tilMovieTitle = findViewById<TextInputLayout>(R.id.tilMovieTitle)
@@ -69,19 +71,21 @@ class AddMovieActivity : AppCompatActivity() {
         val etMovieRating = findViewById<TextInputEditText>(R.id.etMovieRating)
         val btnCancelAddMovie = findViewById<AppCompatButton>(R.id.btnCancelAddMovie)
         ivMovie = findViewById(R.id.ivMovie)
-        setSupportActionBar(toolbar)
 
+        // setting toolbar in the add movie screen
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = "Add New Movie"
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.primaryDarkColor)))
 
-        //instance of database
+        // getting instance of database
         val moviesDatabase = MoviesDatabase.getDatabaseInstance(this)
         val myViewModelFactory = MyViewModelFactory(moviesDatabase!!)
 
         viewModel = ViewModelProvider(this, myViewModelFactory)[MainViewModel::class.java]
 
+        // getting image from the camera to add new movie in the database
         ivMovie?.setOnClickListener {
             cameraLauncher.launch(
                 ImagePicker.with(this)
@@ -92,6 +96,7 @@ class AddMovieActivity : AppCompatActivity() {
             )
         }
 
+        // adding validations and sending new movie data to execute insert movie operation
         btnAddMovie.setOnClickListener {
             val title = etMovieTitle.text.toString()
             val studio = etMovieStudio.text.toString()
@@ -104,6 +109,7 @@ class AddMovieActivity : AppCompatActivity() {
             } else if (rating.isEmpty()) {
                 tilMovieRating.error = "Rating field cannot be emtpty!"
             } else {
+                // add movie operation starts here to save new movie in database
                 val entity = MoviesEntity(
                     movieTitle = title,
                     studio = studio,
@@ -111,6 +117,7 @@ class AddMovieActivity : AppCompatActivity() {
                     criticsRating = rating
                 )
                 viewModel.addMovie(entity)
+
                 Handler(Looper.getMainLooper()).postDelayed({
                     Toast.makeText(this, "Movie Added successfully!", Toast.LENGTH_LONG).show()
                     onBackPressedDispatcher.onBackPressed()
@@ -118,6 +125,7 @@ class AddMovieActivity : AppCompatActivity() {
             }
         }
 
+        // user will navigate to the movie list screen upon cancel button click
         btnCancelAddMovie.setOnClickListener {
             val intent = Intent(this, MoviesActivity::class.java)
             startActivity(intent)
